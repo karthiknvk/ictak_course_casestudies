@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RESULT</title>
+  <link rel="stylesheet" href="../static/css/result.css">
+</head>
+<body>
+
+  <div class="main_container">
+
+
+        <br>
+        <br>
+        {% for key,value in min_max_dict.items() %}
+          <div class="sub_container">
+            <div class="key_container">
+              {{key.upper().replace('_',' ')}}  
+            </div>
+                      
+            <div class="output_container">
+              <output id={{key}} >{{value[2]}}</output>
+            </div>
+
+          </div>
+        {% endfor %}
+        <div class="main_heading" >
+          <h1 style="color:white">
+
+            WINE {{prediction}}
+
+          </h1>
+        </div>
+      <div class="button_container">
+        <form action="/" >
+          <button type="submit" class="button_class" >TRY AGAIN</button>
+        </form>
+        
+      </div>
+      
+      <br>
+
+  </div>
+  <br>
+
+</body>
+</html>

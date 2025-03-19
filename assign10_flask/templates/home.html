@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOME</title>
+  <link rel="stylesheet" href="../static/css/home.css">
+</head>
+<body>
+
+  <div class="main_container">
+        <h1 class="main_heading">
+          WINE QUALITY PREDICTION
+        </h1>
+        <br>
+        <br>
+
+        <form method="POST" action="/predict">
+          {% for key,value in min_max_dict.items() %}
+            <div class="sub_container">
+              <div class="key_container">
+                {{key.upper().replace('_',' ')}}  
+              </div>
+
+              <div class="input_range_container">
+                <span class="value_container_1">{{value[0]}}</span> 
+                <input class='input_range' 
+                      name="{{key.upper().replace('_',' ')}}" 
+                      type="range" value="{{(value[0]+value[1])/2}}" 
+                      min={{value[0]}}
+                      max={{value[1]}}  
+                      step=0.001 
+                      oninput="showVal(this.value,this.name)">
+                <span class="value_container_2">{{value[1]}} </span>
+              </div>
+              
+              <div>
+                <input class="input_number_container" 
+                      name={{key}} 
+                      id="{{key.upper().replace('_',' ')}}" 
+                      type="number"  
+                      min={{value[0]}} 
+                      max={{value[1]}} 
+                      step=0.001  
+                      value={{(value[0]+value[1])/2}} 
+                      onblur="validate(this.value, '{{value[0]}}', '{{value[1]}}',this.id)">
+              </div>
+
+
+            </div>
+          {% endfor %}
+
+          <div class="button_container">
+            <button type="submit" class="button_class" >PREDICT</button>
+          </div>
+
+          <br>
+        </form>
+  </div>
+
+  
+  <script>
+    
+    function showVal(new_value,key){
+      document.getElementById(key).value=new_value;
+      }
+
+      
+    function validate(value,min,max,id){
+      if (value.trim() === ""){
+        alert("Values Should not be empty");
+        document.getElementById(id).value=(parseFloat(min)+parseFloat(max))/2;
+        return;
+      }
+      
+      let taken_value =parseFloat(value);
+      
+      if(taken_value<min){
+        alert(id+" should not be lesser than "+min);
+        document.getElementById(id).value=min;
+      }
+      else if(taken_value>max){
+        alert(id+" should not be greater than "+max);
+        document.getElementById(id).value=max;
+      }
+      else{
+        document.getElementById(id).value=taken_value.toFixed(3);
+      }
+    }
+
+  </script>
+  <br>
+
+</body>
+</html>
