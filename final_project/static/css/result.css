@@ -1,0 +1,19 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.row{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.nested_row{
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+.output{
+  font-size: 100px;
+}
